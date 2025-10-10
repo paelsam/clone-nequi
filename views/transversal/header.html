@@ -1,0 +1,35 @@
+<header class="header-login">
+    <popup2></popup2>
+    <div class="wrap-header">
+        <div class="row">
+            <div class="col-xs-12 col-md-2">
+                <div class="logo">
+                    <a href="{{configCountry.links.home}}">
+                        <img alt="nequi" src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64dfef05bc6705edb9447499_nequi.svg">
+                    </a>
+                </div>
+                <div class="btn-menu-hamburguer" ng-click="openMenu();">
+                    <a class="{{hamburgerMenuState}}">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-10 container-buttons">
+                <div class="wrap-main-menu {{hamburgerMenuState}}">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8"></div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="buttons-right">
+                                <ul>
+                                    <li ng-if="!hidePa">
+                                        <a target="_blank" href="{{configCountry.links.recharge}}">{{::i18n.header.login.recharge}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

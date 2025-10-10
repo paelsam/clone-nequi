@@ -1,0 +1,23 @@
+<div class="select-country {{openClass}}" ng-click="toggleSelect();">
+    <div class="country-wrap country-active">
+        <div class="select-col select-col-img">
+            <img src="{{options[indexCountry].image}}" alt="{{options[indexCountry].value}}">
+        </div>
+        <div class="select-col">
+            <p>+{{options[indexCountry].title}} </p>
+            <input class="country-input" type="text" name="j_region" id="j_region" value="{{options[indexCountry].title}}">
+        </div>
+    </div>
+    <ul>
+        <li ng-repeat="option in options">
+            <div ng-click="setCountry($index);" class="country-wrap">
+                <div class="select-col select-col-img">
+                    <img src="{{option.image}}" alt="{{option.value}}">
+                </div>
+                <div class="select-col">
+                    <p>+{{option.title}}</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
