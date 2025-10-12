@@ -1,0 +1,14 @@
+<section class="popup-wrapper {{popupController.animationShow}} {{popupController.moveShow}}">
+    <div class="popup-table-wrap">
+        <div class="popup-table-cell">
+            <div class="popup-box">
+                <div class="close-button-popup" ng-click="popupController.closeModal()('');">x</div>
+                <img ng-if="popupController.modalInfo.img" ng-src="{{popupController.modalInfo.img}}">
+                <h1>{{popupController.modalInfo.title}}</h1>
+                <p>{{popupController.modalInfo.text}}</p>
+                <p ng-if="popupController.modalInfo.text2">{{popupController.modalInfo.text2}}</p>
+                <a class="button-web" href="" ng-click="popupController.success()('');">{{popupController.modalInfo.button}}</a>
+            </div>
+        </div>
+    </div>
+</section>

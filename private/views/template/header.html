@@ -1,0 +1,50 @@
+<header class="header-login">
+    <popup2></popup2>
+    <div class="wrap-header">
+        <div class="row">
+            <div class="col-xs-12 col-md-2">
+                <div class="logo">
+                    <a href="{{configCountry.links.home}}">
+                        <img alt="nequi" src="https://uploads-ssl.webflow.com/6317a229ebf7723658463b4b/64dfef05bc6705edb9447499_nequi.svg">
+                    </a>
+                </div>
+                <div class="btn-menu-hamburguer" ng-click="openMenu();">
+                    <a href="#" class="{{hamburgerMenuState}}">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row row-login">
+            <div class="col-xs-12">
+                <div class="wrap-main-menu {{hamburgerMenuState}}">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="buttons-right">
+                                <ul class="links">
+                                    <li>
+                                        <a href="{{::configCountry.links.welcome}}" ng-class="{'active': currentView === i18n.header.welcome.myAccount}">{{::i18n.header.welcome.myAccount}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{::i18n.header.welcome.urlDocumentation}}" ng-class="{'active': currentView === i18n.header.welcome.documentation}">{{::i18n.header.welcome.documentation}}</a>
+                                    </li>
+                                    <li>
+                                        <a view="{{::i18n.googleAnalytics.category.welcome}}" ga="{{::i18n.googleAnalytics.label.welcomeFaq}}" href="{{configCountry.links.faq}}">{{::i18n.header.welcome.faq}}</a>
+                                    </li>
+                                </ul>
+                                <ul class="buttons">
+                                    <li ng-if="!hidePa">
+                                        <a class="primary-button" view="{{::i18n.googleAnalytics.category.welcome}}" ga="{{::i18n.googleAnalytics.label.welcomeRecharge}}" target="_blank" href="{{configCountry.links.recharge}}">{{::i18n.header.welcome.recharge}}</a>
+                                    </li>
+                                    <li>
+                                        <a class="second-button" href="#" ng-click="logout();">{{::i18n.header.welcome.back}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

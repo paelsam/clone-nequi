@@ -1,0 +1,45 @@
+<footer>
+    <div class="container-footer">
+        <div ng-if="!hidePa" class="logo-vigilado"></div>
+        <div class="container-top">
+            <div class="logo-nequi">
+                <img alt="logo nequi" src="{{configCountry.imgs.logoNequi}}">
+            </div>
+            <div class="stores">
+                <a href="{{configCountry.store.android}}">
+                    <img src="{{configCountry.store.androidimg}}">
+                </a>
+                <a href="{{configCountry.store.apple}}">
+                    <img src="{{configCountry.store.appleimg}}">
+                </a>
+                <a href="{{configCountry.store.huawei}}">
+                    <img src="{{configCountry.store.huaweiimg}}">
+                </a>
+            </div>
+            <div class="group-bancolombia">
+                <a href="{{configCountry.links.bancolombiaGroup}}">
+                    <img class="img-group-bancolombia" src="{{configCountry.imgs.bancolombiaGroup}}">
+                </a>
+            </div>
+        </div>
+        <hr class="separator">
+        <div class="container-middle">
+            <div class="col" ng-repeat="item in configCountry.labels">
+                <input type="checkbox" id="{{item.id}}" class="hide">
+                <label for="{{item.id}}">
+                    {{item.title}} <img class="ic-accordion hide" src="{{configCountry.imgs.iconArrow}}">
+                </label>
+                <div class="content-accordion">
+                    <a ng-repeat="dataLink in item.data" href="{{dataLink.link}}">{{dataLink.label}}</a>
+                </div>
+            </div>
+        </div>
+        <hr class="separator">
+        <div class="container-end">
+            <a ng-repeat="item in configCountry.socialMedia" href="{{item.link}}">
+                <img src="{{item.img}}">
+            </a>
+        </div>
+        <hr class="separator hide show-mobile">
+    </div>
+</footer>

@@ -1,0 +1,55 @@
+<div ng-controller="welcomeController as welcomeControl">
+    <busy-indicator></busy-indicator>
+    <section class="welcome-wrap welcome-login">
+        <div class="welcome-box-wrap">
+            <div class="row">
+                <div class="col-lg-2 col-md-2"></div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="welcome-box-info">
+                        <div class="profile-img">
+                            <img src="../images/profile.svg" alt="profile">
+                        </div>
+                        <div class="name-box">
+                            <h3 class="name">{{welcomeControl.infoPersonal.name}} </h3>
+                            <p class="phone-number">{{welcomeControl.infoPersonal.phoneNumber | phone}} </p>
+                            <spinner ng-if="!welcomeControl.statusPreloadProfile"></spinner>
+                        </div>
+                        <hr class="separator">
+                        <div class="email-box">
+                            <h4 class="email-title">{{::i18n.views.welcome.introEmail}} </h4>
+                            <p>{{welcomeControl.infoPersonal.email}} </p>
+                            <spinner ng-if="!welcomeControl.statusPreloadProfile"></spinner>
+                        </div>
+                        <hr class="separator">
+                        <div class="last-connection">
+                            <p>{{welcomeControl.lastSessionString | lastDateFilter : i18n.views.welcome.lastSession}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="welcome-box-info">
+                        <div class="info-header">
+                            <div class="img-fire">
+                                <img src="../images/alert.svg" alt="alerta">
+                            </div>
+                            <div class="text-fire">
+                                <h3>{{::i18n.views.welcome.titlePanic2}} </h3>
+                            </div>
+                        </div>
+                        <div class="info-panic-wrap">
+                            <p class="text-margin-two">{{::i18n.views.welcome.TopMessagePanic2}} </p>
+                        </div>
+                        <hr class="dashed">
+                        <p style="margin-bottom: 20px" class="text-button">{{::i18n.views.welcome.textButtons}} </p>
+                        <div class="container-panic-buttons">
+                            <a class="button-web panic-button" style="margin-bottom: 5px" ng-click="welcomeControl.openPopup();" href="">{{::i18n.views.welcome.btnPanic}}</a>
+                            <a class="button-web panic-button" ng-if="welcomeControl.isNequiCardActivated" ng-click="welcomeControl.openCancelModal();" href="">{{::i18n.views.welcome.btnCancelCard}}</a>
+                        </div>
+                        <spinner ng-if="!welcomeControl.statusGetCardStatus"></spinner>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2"></div>
+            </div>
+        </div>
+    </section>
+</div>
