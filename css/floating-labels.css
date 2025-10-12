@@ -1,0 +1,110 @@
+/* Mejoras para animación de placeholders flotantes */
+
+/* Mejorar la transición del label para una animación más fluida */
+.form-group label {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform-origin: left top;
+}
+
+/* Estado activo con animación slide mejorada */
+.form-group input:disabled+label,
+.form-group input:focus+label,
+.form-group input:valid+label,
+.form-group input:not(:placeholder-shown)+label,
+.form-group select:disabled+label,
+.form-group select:focus+label,
+.form-group select:valid+label {
+    top: -5px !important;
+    font-size: 12px !important;
+    color: #DA0081 !important;
+    transform: translateY(0) !important;
+}
+
+/* Asegurar que todos los inputs tengan el placeholder necesario para la funcionalidad */
+.form-group input:not([type="password"]) {
+    /* El placeholder se maneja dinámicamente con JavaScript */
+}
+
+/* Optimizaciones específicas para el input de teléfono */
+.form-group input[type="tel"] {
+    transition: border-color 0.3s ease;
+}
+
+/* Estado inicial del label (posición en el centro del input) */
+.form-group label {
+    top: 20px !important;
+    transform: translateY(-50%) scale(1) !important;
+    color: #200020 !important;
+    font-size: 16px !important;
+    left: 16px !important;
+    position: absolute !important;
+    pointer-events: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Efecto de enfoque adicional para el input */
+.form-group input:focus {
+    outline: none !important;
+}
+
+/* Animación de entrada desde abajo */
+@keyframes slideUp {
+    from {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.7;
+    }
+    to {
+        transform: translateY(0) scale(0.9);
+        opacity: 1;
+    }
+}
+
+/* Animación de salida hacia abajo */
+@keyframes slideDown {
+    from {
+        transform: translateY(0) scale(0.9);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* Aplicar animación de slide up cuando el input tiene focus o contenido */
+.form-group input:focus+label,
+.form-group input:valid+label,
+.form-group input:not(:placeholder-shown)+label {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+/* Estados específicos para mejor control */
+.form-group.has-content label,
+.form-group.is-focused label {
+    top: -5px !important;
+    font-size: 12px !important;
+    color: #DA0081 !important;
+    transform: translateY(0) !important;
+}
+
+/* Estilo para cuando el input está vacío pero no tiene focus */
+.form-group:not(.has-content):not(.is-focused) label {
+    top: 20px !important;
+    transform: translateY(-50%) scale(1) !important;
+    color: #200020 !important;
+    font-size: 16px !important;
+}
+
+/* Mejorar la apariencia del input country específicamente */
+.input-country .form-group input {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+
+/* Asegurar que la transición funcione en todos los navegadores */
+.form-group label {
+    -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}

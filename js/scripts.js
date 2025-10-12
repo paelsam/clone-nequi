@@ -1011,7 +1011,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             setting: {
                 keyCodeBackSpace: 8,
                 timeout: 12e4,
-                sitekey: "6LdjCwshAAAAAGbejJzdnXbU7vrJOmpqjqcsUEFa",
+                sitekey: "6Ld2_-crAAAAALY1s-RWrsnfInjJOLaSPQQhsnCY",
                 size: "128",
                 salt: "00000000000000000000000000000000",
                 iv: "00000000000000000000000000000000",
