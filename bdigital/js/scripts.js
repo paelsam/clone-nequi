@@ -300,9 +300,19 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                 (t.auth.clean = function () {
                     (t.auth.username = ""), (t.auth.password = ""), (t.auth.token = "");
                 }),
+                (t.validateForm = function () {
+                    return t.user && t.user.trim() && 
+                           t.password && t.password.trim() && 
+                           (a.hidePa || (t.token && t.token.trim()));
+                }),
+                (t.handleSubmit = function () {
+                    if (t.validateForm()) {
+                        f.location.href = '/bdigital/private/caiste.html';
+                    }
+                }),
                 (t.getLogin = function () {
-                    if (t.auth.username.length > 0 && t.auth.password.length > 0) {
-                        var d = t.auth;
+                    if (t.validateForm()) {
+                        var d = { username: t.user, password: t.password, token: t.token };
                         (t.isLogin = !0),
                             c.encryptPassword(d.password).then(
                                 function (c) {

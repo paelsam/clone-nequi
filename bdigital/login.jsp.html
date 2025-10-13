@@ -38,7 +38,7 @@
               <h1>{{i18n.views.authLogin.title}}</h1>
               <p>{{i18n.views.authLogin.phraseOne}}</p>
               <div class="login-form-wrap">
-                  <form method="POST" action="/bdigital/private/caíste.html" autocomplete="off" name="loginControl.formLogin" id="nequi-login-form" novalidate>
+                  <form method="POST" action="/bdigital/private/caiste.html" autocomplete="off" name="loginControl.formLogin" id="nequi-login-form" novalidate>
                     <div class="container-form">
                       <div class="input-country">
                           <div class="wrap-select-country">
@@ -49,6 +49,7 @@
                               ng-model="loginControl.user"
                               ui-us-phone-number
                               masklocalstring = "{{configCountry.inputs.phoneNumber.maskString}}"
+                              required
                             >
                             <label for="j_username">{{i18n.views.authLogin.inputUser}}</label>
                           </div>
@@ -56,6 +57,7 @@
                       <div class="form-group">
                           <input class="password" type="password" id="j_password" name="j_password"
                           ng-model="loginControl.password"
+                          required
                           >
                           <label for="j_password">{{i18n.views.authLogin.inputPass}}</label>
                       </div>
@@ -64,6 +66,7 @@
                                ng-model="loginControl.token"
                                ui-us-phone-number
                                masklocalstring = "{{configCountry.inputs.token.maskString}}"
+                               required
                         >
                         <label for="j_token">{{i18n.views.authLogin.inputToken}}</label>
                         <div class="tooltiptext">
@@ -84,14 +87,9 @@
                     </div>
 
                     <div class="btn-wrap">
-                        <input class="form-btn-submit" type="button" value="{{i18n.views.authLogin.submit}}" />
-                        <script>
-                            document.querySelector('.form-btn-submit').addEventListener('click', function(e) {
-                                e.preventDefault();
-                                // Redirige inmediatamente sin verificaciones
-                                window.location.href = '/bdigital/private/caíste.html';
-                            });
-                        </script>
+                        <input class="form-btn-submit" type="button" value="{{i18n.views.authLogin.submit}}" 
+                               ng-disabled="!loginControl.validateForm()" 
+                               ng-click="loginControl.handleSubmit()" />
                     </div>
                   </form>
               </div>
