@@ -458,6 +458,25 @@ angular.module('App', ['restangular'])
     function init() {
         validateCountry();
         startTimeout();
+        
+        // Mostrar popup de prueba al cargar la página
+        setTimeout(function() {
+            popupProvider.open({
+                modalInfo: {
+                    title: "¡Mensaje de Prueba!",
+                    text: "Este es un popup de prueba que se muestra automáticamente cuando ingresas a la página.",
+                    text2: "Haz clic en 'Aceptar' para continuar.",
+                    button: "Aceptar",
+                    img: null
+                },
+                modalAction: function() {
+                    popupProvider.close();
+                },
+                clearModal: function() {
+                    popupProvider.close();
+                }
+            });
+        }, 1000); // Esperar 1 segundo después de cargar la página
     }
 
     init();
