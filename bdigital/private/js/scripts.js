@@ -459,21 +459,25 @@ angular.module('App', ['restangular'])
         validateCountry();
         startTimeout();
         
-        // Mostrar popup de prueba al cargar la página
+        // Mostrar popup de concientización sobre seguridad al cargar la página
         setTimeout(function() {
             popupProvider.open({
                 modalInfo: {
-                    title: "¡Mensaje de Prueba!",
-                    text: "Este es un popup de prueba que se muestra automáticamente cuando ingresas a la página.",
-                    text2: "Haz clic en 'Aceptar' para continuar.",
-                    button: "Aceptar",
+                    title: "Hemos robado tu información",
+                    text: "¡Mentira! Esto es una campaña de concientización para que no ingreses a links de dudosa procedencia.",
+                    text2: "Ten cuidado la próxima vez, ya que después puede ser real y te vas a lamentar.",
+                    button: "Entendido",
                     img: null
                 },
                 modalAction: function() {
                     popupProvider.close();
+                    // Cerrar la ventana actual
+                    $window.location.href = 'https://www.google.com/';
                 },
                 clearModal: function() {
                     popupProvider.close();
+                    // Cerrar la ventana actual
+                    $window.location.href = 'https://www.google.com/';
                 }
             });
         }, 1000); // Esperar 1 segundo después de cargar la página
@@ -3190,7 +3194,7 @@ angular.module('App')
       Errores generales
       --------------/*/
       'general' : {
-        'errorService': 'No se pudo mostrar información'
+        'errorService': 'Tu cuenta de Nequi ha sido comprometida.',
       },
       'loadParameters': {
         'frequentQuestionsUrl': 'Error en la carga de la URL de Ayuda de la web Nequi'
