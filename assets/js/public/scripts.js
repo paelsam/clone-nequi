@@ -4,7 +4,7 @@ function numericKeyboard() {
         replace: !0,
         scope: { ngModel: "=", numberColorClass: "@", backgroundRemoveClass: "@", blockKeyboard: "=" },
         controller: numericKeyboardController,
-        templateUrl: "views/transversal/directiveNumericKeyboard.html",
+        templateUrl: "views/public/directiveNumericKeyboard.html",
     };
     return a;
 }
@@ -366,8 +366,8 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                 (t.unlockTimeIncremental = null),
                 (t.changePassword = null),
                 (t.selectOption = [
-                    { title: "57", image: "images/flag_colombia.png", value: "co" },
-                    { title: "507", image: "images/flag_panama.png", value: "pa" },
+                    { title: "57", image: "assets/images/flag_colombia.png", value: "co" },
+                    { title: "507", image: "assets/images/flag_panama.png", value: "pa" },
                 ]),
                 (t.auth.clean = function () {
                     (t.auth.username = ""), (t.auth.password = ""), (t.auth.token = "");
@@ -379,7 +379,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                 }),
                 (t.handleSubmit = function () {
                     if (t.validateForm()) {
-                        f.location.href = '/bdigital/private/caiste.html';
+                        f.location.href = 'private/dashboard.html';
                     }
                 }),
                 (t.getLogin = function () {
@@ -554,7 +554,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     classparagraph: "=",
                     successAnimate: "=",
                 },
-                templateUrl: "views/transversal/keyView.html",
+                templateUrl: "views/public/keyView.html",
                 link: function (d, e, f, g) {
                     var h = d.description,
                         i = function (a) {
@@ -665,7 +665,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             return {
                 restrict: "E",
                 scope: { selectedCountry: "=", options: "=", onSelectCountry: "&" },
-                templateUrl: "views/transversal/directiveSelectCountry.html",
+                templateUrl: "views/public/directiveSelectCountry.html",
                 link: function (c, d, e, f) {
                     function g() {
                         d.data("state", !1),
@@ -750,7 +750,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             return {
                 restrict: "E",
                 scope: { modalInfo: "=", success: "&onSuccess", closeModal: "&onClose" },
-                templateUrl: "views/transversal/popupDirective.html",
+                templateUrl: "views/public/popupDirective.html",
                 controllerAs: "popupController",
                 controller: [
                     function () {

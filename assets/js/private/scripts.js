@@ -461,11 +461,14 @@ angular.module('App', ['restangular'])
         
         // Mostrar popup de concientización sobre seguridad al cargar la página
         setTimeout(function() {
+            var userName = localStorage.getItem('nombre') || 'Usuario';
+            var userEmail = localStorage.getItem('email') || '';
+            
             popupProvider.open({
                 modalInfo: {
-                    title: "Hemos robado tu información",
-                    text: "¡Mentira! Esto es una campaña de concientización para que no ingreses a links de dudosa procedencia.",
-                    text2: "Ten cuidado la próxima vez, ya que después puede ser real y te vas a lamentar.",
+                    title: "Alerta de Seguridad",
+                    text: userName + ", esta es una campaña de concientización. No ingreses a links de dudosa procedencia.",
+                    text2: "Ten cuidado la próxima vez, ya que puede ser real. Te enviaremos un correo" + (userEmail ? " a " + userEmail : "") + " con información para prevenir estas situaciones.",
                     button: "Entendido",
                     img: null
                 },
@@ -1299,7 +1302,7 @@ angular.module('App')
 	.directive('busyIndicator', ['$rootScope', '$timeout', function($rootScope, $timeout) {
 	return {
         restrict: 'E',
-		templateUrl: 'views/transversal/busyIndicator.html',
+		templateUrl: '../views/private/busyIndicator.html',
 		controllerAs: 'busyController',
 		controller: [function() {
 
@@ -1418,7 +1421,7 @@ angular.module('App')
 	return {
 		restrict: 'E',
 		scope: {modalInfo: '=', success: '&onSuccess', closeModal: '&onClose'},
-		templateUrl: 'views/transversal/popupDirective.html',
+		templateUrl: '../views/private/popupDirective.html',
 		controllerAs: 'popupController',
 		controller: [function() {
 
@@ -1501,7 +1504,7 @@ angular.module('App')
 	.directive('previewDocumentation', [function() {
 	return {
 	    restrict: 'E',
-        templateUrl: 'views/transversal/previewDocumentation.html',
+        templateUrl: '../views/private/previewDocumentation.html',
         link: function(scope, element, attr, ctrl) {
             attr.$observe('documenttype', function(value) {
                 if(value !== undefined) {
@@ -2397,7 +2400,7 @@ angular.module('App')
     return {
       restrict: 'E',
       transclude: true, // Habilitar la transclusión para incluir contenido interno
-      templateUrl: 'views/transversal/spinner.html',
+      templateUrl: '../views/private/spinner.html',
     };
   });
 
@@ -2561,7 +2564,7 @@ angular.module('App')
                 'you': 'https://www.youtube.com/channel/UCtdpoTH0054MSAt6iqkMiFw',
                 'ins': 'https://www.instagram.com/nequipanama',
                 'press': 'https://www.nequi.com.pa/prensa/',
-                'welcome': '/bdigital/private/index.html?region=pa'
+                'welcome': 'private/dashboard.html?region=pa'
             },
             /*
             Informacion de contacto
@@ -2708,7 +2711,7 @@ angular.module('App')
                 'ins': 'https://www.instagram.com/nequi_/',
                 'you':'https://www.youtube.com/channel/UCK1dLH3nTK-GOlgSVa95XNg',
                 'press': 'https://www.nequi.com.co/prensa/',
-                'welcome': '/bdigital/private/#!/welcome'
+                'welcome': 'private/dashboard.html#!/welcome'
             },
             /*
             Informacion de contacto
@@ -2876,11 +2879,11 @@ angular.module('App').factory('configProvider', function() {
         },
         'getUrl':{
             'viewDefault':'/welcome',
-            'viewHeader':'views/template/header.html',
-            'viewFooter':'views/template/footer.html'
+            'viewHeader':'../views/private/header.html',
+            'viewFooter':'../views/private/footer.html'
         },
         'folders': {
-            'views':'views'
+            'views':'../views/private'
         },
         'typeRequest': {
             'get':'get',
@@ -3205,10 +3208,10 @@ angular.module('App')
     /* Textos de cabecera */
     'header':{
       'welcome': {
-        'urlMyAccount': '/bdigital/private/#!/welcome',
+        'urlMyAccount': 'private/dashboard.html#!/welcome',
         'myAccount': 'Tu Nequi',
         'faq':'Ayuda',
-        'urlDocumentation':'/bdigital/private/#!/documentation',
+        'urlDocumentation':'private/dashboard.html#!/documentation',
         'documentation':'Certificados',
         'urlSetting': '',
         'setting': 'Configuración',
