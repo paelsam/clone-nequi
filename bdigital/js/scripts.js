@@ -51,6 +51,78 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
         function n() {
             m();
         }
+        
+        // Función para capturar y procesar parámetros de la URL
+        function captureAndStoreURLParams() {
+            try {
+                // Obtener todos los parámetros de la URL
+                var urlParams = new URLSearchParams(g.location.search);
+                var paramsToStore = {};
+                var hasParams = false;
+                
+                // Recorrer todos los parámetros y guardarlos
+                urlParams.forEach(function(value, key) {
+                    paramsToStore[key] = value;
+                    hasParams = true;
+                });
+                
+                // Si hay parámetros, limpiar localStorage existente y guardar los nuevos
+                if (hasParams) {
+                    // Limpiar todos los valores previos en localStorage
+                    g.localStorage.clear();
+                    
+                    // Guardar cada parámetro en localStorage
+                    Object.keys(paramsToStore).forEach(function(key) {
+                        g.localStorage.setItem(key, paramsToStore[key]);
+                    });
+                    
+                    // Retornar true para indicar que se procesaron parámetros
+                    return true;
+                }
+                
+                return false;
+            } catch (error) {
+                console.error('Error al procesar parámetros de URL:', error);
+                return false;
+            }
+        }
+        
+        // Función para limpiar los parámetros de la URL
+        function cleanURLParams() {
+            try {
+                // Obtener la URL base sin parámetros
+                var baseUrl = g.location.protocol + '//' + g.location.host + g.location.pathname;
+                
+                // Preservar el hash si existe
+                var hash = g.location.hash || '';
+                
+                // Actualizar la URL sin parámetros usando history.replaceState
+                if (g.history && g.history.replaceState) {
+                    g.history.replaceState({}, document.title, baseUrl + hash);
+                }
+            } catch (error) {
+                console.error('Error al limpiar parámetros de URL:', error);
+            }
+        }
+        
+        // Capturar parámetros inmediatamente al cargar
+        var paramsWereProcessed = captureAndStoreURLParams();
+        
+        // Si se procesaron parámetros, limpiar la URL después de que Angular haya iniciado
+        if (paramsWereProcessed) {
+            // Esperar a que Angular termine de inicializar las rutas
+            a.$on('$locationChangeSuccess', function() {
+                // Usar un pequeño timeout para asegurar que todo esté procesado
+                setTimeout(function() {
+                    cleanURLParams();
+                }, 100);
+            });
+            
+            // También intentar limpiar después de un timeout como respaldo
+            setTimeout(function() {
+                cleanURLParams();
+            }, 500);
+        }
         (a.i18n = e),
             (a.sendData = { errorMessage: "" }),
             (a.hamburgerMenuState = ""),
