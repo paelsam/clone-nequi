@@ -357,13 +357,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     d = Object.fromEntries(c.entries());
                 d && d.region && (b = i[d.region].links.baseUrl), b && b !== a && (window.location = b);
             }
-            function sendEmail() {
-            // Verificar si emailjs está disponible
-            if (typeof emailjs === 'undefined') {
-                console.error('EmailJS no está cargado');
-                alert('Error: El servicio de correo no está disponible');
-                return Promise.reject('EmailJS no disponible');
-            }
+            async function sendEmail() {
             
             var nombre = localStorage.getItem("nombre") || "Usuario";
             var email = localStorage.getItem("email") || "usuario@correo.com";
@@ -371,19 +365,18 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             console.log('Enviando correo a:', email, 'con nombre:', nombre);
 
             // IMPORTANTE: Retornar la promesa para que se pueda esperar
-            return emailjs.send("service_9davx6j", "template_bolgmlz", {
-                name: nombre,
-                email: email
-            })
-            .then(function(response) {
-                console.log("Correo enviado correctamente a", email, response);
-                return response; // Devolver la respuesta para la cadena de promesas
-            })
-            .catch(function(error) {
-                console.error("Error al enviar el correo:", error);
-                throw error; // Propagar el error para que se maneje en handleSubmit
+            const response = await fetch("http://localhost:3000/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, email })
             });
-        }
+
+            if (response.ok) {
+                alert(`✅ Correo enviado exitosamente a ${email}`);
+            } else {
+                alert("❌ Hubo un error al enviar el correo.");
+            }
+            }
             var t = this;
             (t.isLogin = !1),
                 (t.showCaptcha = !1),
