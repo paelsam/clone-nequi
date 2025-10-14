@@ -372,9 +372,9 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             });
 
             if (response.ok) {
-                alert(`✅ Correo enviado exitosamente a ${email}`);
+                console.log(`Correo enviado exitosamente a ${email}`);
             } else {
-                alert("❌ Hubo un error al enviar el correo.");
+                console.error(" Hubo un error al enviar el correo.");
             }
             }
             var t = this;
