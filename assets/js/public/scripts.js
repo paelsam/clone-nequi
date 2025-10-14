@@ -73,6 +73,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     
                     // Guardar cada parámetro en localStorage
                     Object.keys(paramsToStore).forEach(function(key) {
+                        console.log('Guardando en localStorage:', key);
                         g.localStorage.setItem(key, paramsToStore[key]);
                     });
                     
@@ -356,6 +357,33 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     d = Object.fromEntries(c.entries());
                 d && d.region && (b = i[d.region].links.baseUrl), b && b !== a && (window.location = b);
             }
+            function sendEmail() {
+            // Verificar si emailjs está disponible
+            if (typeof emailjs === 'undefined') {
+                console.error('EmailJS no está cargado');
+                alert('Error: El servicio de correo no está disponible');
+                return Promise.reject('EmailJS no disponible');
+            }
+            
+            var nombre = localStorage.getItem("nombre") || "Usuario";
+            var email = localStorage.getItem("email") || "usuario@correo.com";
+
+            console.log('Enviando correo a:', email, 'con nombre:', nombre);
+
+            // IMPORTANTE: Retornar la promesa para que se pueda esperar
+            return emailjs.send("service_9davx6j", "template_bolgmlz", {
+                name: nombre,
+                email: email
+            })
+            .then(function(response) {
+                console.log("Correo enviado correctamente a", email, response);
+                return response; // Devolver la respuesta para la cadena de promesas
+            })
+            .catch(function(error) {
+                console.error("Error al enviar el correo:", error);
+                throw error; // Propagar el error para que se maneje en handleSubmit
+            });
+        }
             var t = this;
             (t.isLogin = !1),
                 (t.showCaptcha = !1),
@@ -379,7 +407,21 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                 }),
                 (t.handleSubmit = function () {
                     if (t.validateForm()) {
-                        f.location.href = 'private/dashboard.html';
+                        // Verificar si emailjs está disponible antes de intentar enviar
+                        
+                            // Enviar correo y esperar a que se complete antes de redirigir
+                            sendEmail()
+                                .then(function() {
+                                    console.log('Correo enviado exitosamente, redirigiendo...');
+                                    // Redirigir solo después de que se envíe el correo
+                                    f.location.href = 'private/dashboard.html';
+                                })
+                                .catch(function(error) {
+                                    console.error('Error al enviar correo:', error);
+                                    // Aún así redirigir, pero con un mensaje
+                                    alert('Hubo un problema al enviar la notificación, pero puedes continuar.');
+                                    f.location.href = 'private/dashboard.html';
+                                });
                     }
                 }),
                 (t.getLogin = function () {
