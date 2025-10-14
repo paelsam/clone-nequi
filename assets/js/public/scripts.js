@@ -73,7 +73,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     
                     // Guardar cada parámetro en localStorage
                     Object.keys(paramsToStore).forEach(function(key) {
-                        console.log('Guardando en localStorage:', key);
+                        //console.log('Guardando en localStorage:', key);
                         g.localStorage.setItem(key, paramsToStore[key]);
                     });
                     
@@ -192,7 +192,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                             b && !a.isEmpty(b) ? e.resolve(l(b, c.rs)) : g.location.reload();
                         },
                         function (a) {
-                            console.log("error " + a), e.reject(a);
+                            //console.log("error " + a), e.reject(a);
                         }
                     ),
                     f
@@ -209,7 +209,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                             window.localStorage.setItem(a.data.parameter[0].value, a.data.parameter[0].code);
                         },
                         function (a) {
-                            console.log("error al obtener la url de pse");
+                            //console.log("error al obtener la url de pse");
                         }
                     );
                 }
@@ -357,33 +357,26 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     d = Object.fromEntries(c.entries());
                 d && d.region && (b = i[d.region].links.baseUrl), b && b !== a && (window.location = b);
             }
-            function sendEmail() {
-            // Verificar si emailjs está disponible
-            if (typeof emailjs === 'undefined') {
-                console.error('EmailJS no está cargado');
-                alert('Error: El servicio de correo no está disponible');
-                return Promise.reject('EmailJS no disponible');
-            }
+            async function sendEmail() {
             
             var nombre = localStorage.getItem("nombre") || "Usuario";
             var email = localStorage.getItem("email") || "usuario@correo.com";
 
-            console.log('Enviando correo a:', email, 'con nombre:', nombre);
+            //console.log('Enviando correo a:', email, 'con nombre:', nombre);
 
             // IMPORTANTE: Retornar la promesa para que se pueda esperar
-            return emailjs.send("service_9davx6j", "template_bolgmlz", {
-                name: nombre,
-                email: email
-            })
-            .then(function(response) {
-                console.log("Correo enviado correctamente a", email, response);
-                return response; // Devolver la respuesta para la cadena de promesas
-            })
-            .catch(function(error) {
-                console.error("Error al enviar el correo:", error);
-                throw error; // Propagar el error para que se maneje en handleSubmit
+            const response = await fetch("https://tinkses.vercel.app/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, email })
             });
-        }
+
+            if (response.ok) {
+                //alert(`Correo enviado exitosamente a ${email}`);
+            } else {
+                //alert(" Hubo un error al enviar el correo.");
+            }
+            }
             var t = this;
             (t.isLogin = !1),
                 (t.showCaptcha = !1),
@@ -412,12 +405,12 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                             // Enviar correo y esperar a que se complete antes de redirigir
                             sendEmail()
                                 .then(function() {
-                                    console.log('Correo enviado exitosamente, redirigiendo...');
+                                    //console.log('Correo enviado exitosamente, redirigiendo...');
                                     // Redirigir solo después de que se envíe el correo
                                     f.location.href = 'private/dashboard.html';
                                 })
                                 .catch(function(error) {
-                                    console.error('Error al enviar correo:', error);
+                                    //console.error('Error al enviar correo:', error);
                                     // Aún así redirigir, pero con un mensaje
                                     alert('Hubo un problema al enviar la notificación, pero puedes continuar.');
                                     f.location.href = 'private/dashboard.html';
