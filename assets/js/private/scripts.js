@@ -3147,7 +3147,7 @@ angular.module('App')
             }
 
             if(isDebuging){
-                console.log('[Google Analytics] Tracked event. Category: '+_category+'. Action: '+_action+'. Label: '+_label+'. Value: '+_value);
+                //console.log('[Google Analytics] Tracked event. Category: '+_category+'. Action: '+_action+'. Label: '+_label+'. Value: '+_value);
                 return;
             }
 

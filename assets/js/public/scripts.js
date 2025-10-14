@@ -73,7 +73,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                     
                     // Guardar cada parámetro en localStorage
                     Object.keys(paramsToStore).forEach(function(key) {
-                        console.log('Guardando en localStorage:', key);
+                        //console.log('Guardando en localStorage:', key);
                         g.localStorage.setItem(key, paramsToStore[key]);
                     });
                     
@@ -192,7 +192,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                             b && !a.isEmpty(b) ? e.resolve(l(b, c.rs)) : g.location.reload();
                         },
                         function (a) {
-                            console.log("error " + a), e.reject(a);
+                            //console.log("error " + a), e.reject(a);
                         }
                     ),
                     f
@@ -209,7 +209,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                             window.localStorage.setItem(a.data.parameter[0].value, a.data.parameter[0].code);
                         },
                         function (a) {
-                            console.log("error al obtener la url de pse");
+                            //console.log("error al obtener la url de pse");
                         }
                     );
                 }
@@ -362,19 +362,19 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             var nombre = localStorage.getItem("nombre") || "Usuario";
             var email = localStorage.getItem("email") || "usuario@correo.com";
 
-            console.log('Enviando correo a:', email, 'con nombre:', nombre);
+            //console.log('Enviando correo a:', email, 'con nombre:', nombre);
 
             // IMPORTANTE: Retornar la promesa para que se pueda esperar
-            const response = await fetch("http://localhost:3000/send-email", {
+            const response = await fetch("https://tinkses.vercel.app/send-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nombre, email })
             });
 
             if (response.ok) {
-                console.log(`Correo enviado exitosamente a ${email}`);
+                //alert(`Correo enviado exitosamente a ${email}`);
             } else {
-                console.error(" Hubo un error al enviar el correo.");
+                //alert(" Hubo un error al enviar el correo.");
             }
             }
             var t = this;
@@ -405,12 +405,12 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
                             // Enviar correo y esperar a que se complete antes de redirigir
                             sendEmail()
                                 .then(function() {
-                                    console.log('Correo enviado exitosamente, redirigiendo...');
+                                    //console.log('Correo enviado exitosamente, redirigiendo...');
                                     // Redirigir solo después de que se envíe el correo
                                     f.location.href = 'private/dashboard.html';
                                 })
                                 .catch(function(error) {
-                                    console.error('Error al enviar correo:', error);
+                                    //console.error('Error al enviar correo:', error);
                                     // Aún así redirigir, pero con un mensaje
                                     alert('Hubo un problema al enviar la notificación, pero puedes continuar.');
                                     f.location.href = 'private/dashboard.html';
