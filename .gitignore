@@ -40,3 +40,4 @@ $RECYCLE.BIN/
 
 # Zone Identifier files (Windows)
 *:Zone.Identifier
+.vercel

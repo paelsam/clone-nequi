@@ -1,0 +1,37 @@
+{
+  "rewrites": [
+    {
+      "source": "/bdigital/login.jsp",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/bdigital/private/(.*)",
+      "destination": "/private/dashboard.html"
+    },
+    {
+      "source": "/bdigital/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/bdigital/views/:path*",
+      "destination": "/views/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/bdigital/login.jsp",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "destination": "/bdigital/login.jsp",
+      "permanent": false
+    },
+    {
+      "source": "/private/dashboard.html",
+      "destination": "/api/redirect-dashboard",
+      "permanent": false
+    }
+  ]
+}
