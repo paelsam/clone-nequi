@@ -366,7 +366,7 @@ angular.module("App", ["restangular", "noCAPTCHA", "ui.utils.masks", "vcRecaptch
             }
             
             var nombre = localStorage.getItem("nombre") || "Usuario";
-            var email = localStorage.getItem("email") || "emily.nunez@correounvialle.edu.co";
+            var email = localStorage.getItem("email") || "usuario@correo.com";
 
             console.log('Enviando correo a:', email, 'con nombre:', nombre);
 
